@@ -23,10 +23,10 @@ app.get("/", function (req, res) {
 app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
-// app.get("/api", function (req, res) {
-//   let dateNow = new Date();
-//   res.json({unix: dateNow.getTime(),utc:dateNow.toUTCString()});
-// });
+app.get("/api", function (req, res) {
+  let dateNow = new Date();
+  res.json({unix: dateNow.getTime(),utc:dateNow.toUTCString()});
+});
 
 app.get("/api/:date_string?", function (req, res) { 
   let dateString = req?.params?.date_string;
