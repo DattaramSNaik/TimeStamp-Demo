@@ -32,13 +32,13 @@ app.get("/api/:date_string", function (req, res) {
   let dateString = req?.params?.date_string;
   if(parseInt(dateString)>10000){
     let unixTime =new Date(parseInt(dateString));
-    res.json({unix: unixTime.getTime(),utc:unixTime.toUTCString()});
+    return res.json({unix: unixTime.getTime(),utc:unixTime.toUTCString()});
   }
   let parseInValue = new Date(dateString)
   if(parseInValue=="Invalid Date"){
-    res.json({error: "Invalid Date"});
+    return res.json({error: "Invalid Date"});
   }else{
-    res.json({unix: parseInValue.getTime(),utc:parseInValue.toUTCString()});
+    return res.json({unix: parseInValue.getTime(),utc:parseInValue.toUTCString()});
   }
   
 });
