@@ -23,50 +23,51 @@ app.get("/", function (req, res) {
 app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
-app.get("/api", function (req, res) {
-  let dateNow = new Date();
-  res.json({unix: dateNow.getTime(),utc:dateNow.toUTCString()});
-});
+// app.get("/api", function (req, res) {
+//   let dateNow = new Date();
+//   res.json({unix: dateNow.getTime(),utc:dateNow.toUTCString()});
+// });
 
 app.get("/api/:date_string?", function (req, res) { 
   let dateString = req?.params?.date_string;
 
-  let response;
+  // let response;
 
-  if (dateString === undefined) {
-    let date = new Date();
-    response = {
-      unix: date.getTime(),
-      utc: date.toUTCString(),
-    }
-  } else {
-    let date = new Date(isFinite(dateString) ? Number(dateString) : dateString);
+  // if (dateString === undefined) {
+  //   let date = new Date();
+  //   response = {
+  //     unix: date.getTime(),
+  //     utc: date.toUTCString(),
+  //   }
+  // } else {
+  //   let date = new Date(isFinite(dateString) ? Number(dateString) : dateString);
 
-    if (date.toString() === 'Invalid Date') {
-      response = {
-        error: "Invalid Date"
-      }
-    } else {
-      response = {
-        unix: date.getTime(),
-        utc: date.toUTCString(),
-      }
-    }
+  //   if (date.toString() === 'Invalid Date') {
+  //     response = {
+  //       error: "Invalid Date"
+  //     }
+  //   } else {
+  //     response = {
+  //       unix: date.getTime(),
+  //       utc: date.toUTCString(),
+  //     }
+  //   }
+  // }
+  if(dateString===undefined){
+    let dateNow = new Date();
+    return res.json({unix: dateNow.getTime(),utc:dateNow.toUTCString()});
   }
-  // console.log("dateString", dateString);
-  // if(parseInt(dateString)>10000){
-  //   let unixTime =new Date(parseInt(dateString));
-  //   return res.json({unix: unixTime.getTime(),utc:unixTime.toUTCString()});
-  // }
-  // let parseInValue = new Date(dateString)
-  // if(parseInValue=="Invalid Date"){
-  //   return res.json({error: "Invalid Date"});
-  // }else{
-  //   return res.json({unix: parseInValue.getTime(),utc:parseInValue.toUTCString()});
-  // }
+  if(parseInt(dateString)>10000){
+    let unixTime =new Date(parseInt(dateString));
+    return res.json({unix: unixTime.getTime(),utc:unixTime.toUTCString()});
+  }
+  let parseInValue = new Date(dateString)
+  if(parseInValue=="Invalid Date"){
+    return res.json({error: "Invalid Date"});
+  }else{
+    return res.json({unix: parseInValue.getTime(),utc:parseInValue.toUTCString()});
+  }
 
-  return res.json(response);
-  
 });
 
 
