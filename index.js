@@ -23,36 +23,11 @@ app.get("/", function (req, res) {
 app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
-// app.get("/api", function (req, res) {
-//   let dateNow = new Date();
-//   res.json({unix: dateNow.getTime(),utc:dateNow.toUTCString()});
-// });
+
 
 app.get("/api/:date_string?", function (req, res) { 
   let dateString = req?.params?.date_string;
 
-  // let response;
-
-  // if (dateString === undefined) {
-  //   let date = new Date();
-  //   response = {
-  //     unix: date.getTime(),
-  //     utc: date.toUTCString(),
-  //   }
-  // } else {
-  //   let date = new Date(isFinite(dateString) ? Number(dateString) : dateString);
-
-  //   if (date.toString() === 'Invalid Date') {
-  //     response = {
-  //       error: "Invalid Date"
-  //     }
-  //   } else {
-  //     response = {
-  //       unix: date.getTime(),
-  //       utc: date.toUTCString(),
-  //     }
-  //   }
-  // }
   if(dateString===undefined){
     let dateNow = new Date();
     return res.json({unix: dateNow.getTime(),utc:dateNow.toUTCString()});
